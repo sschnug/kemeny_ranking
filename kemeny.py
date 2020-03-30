@@ -23,7 +23,7 @@ class KemenyRanking():
         if self.verbose:
             print('Parse input')
 
-        with open(fp) as file:
+        with open(fp, encoding='utf8') as file:
             content = file.readlines()
             content = [x.strip() for x in content]                          # remove newlines
             content = [x.replace(':', '') for x in content]                 # remove ":"
@@ -143,7 +143,7 @@ class KemenyRanking():
         model += pairwise_constraints * x == np.ones(n_pairwise_constr)
         model += triangle_constraints * x >= np.ones(n_triangle_constrs)
 
-        if self.condorcet_red:
+        if self.condorcet_red and condorcet_red_mat != None:
             I, J, V = sp.find(condorcet_red_mat)
             indices_pos = np.ravel_multi_index([J, I], (n,n))
             indices_neg = np.ravel_multi_index([I, J], (n,n))
