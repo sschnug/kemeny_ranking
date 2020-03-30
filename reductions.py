@@ -22,5 +22,8 @@ def extended_condorcet_simple(rankings):
             condorcet_rows.append(other_cand)
             condorcet_cols.append(cand)
 
-    mat = sp.coo_matrix((np.ones(len(condorcet_rows)), (condorcet_rows, condorcet_cols)))
+    if len(condorcet_rows) > 0:
+        mat = sp.coo_matrix((np.ones(len(condorcet_rows)), (condorcet_rows, condorcet_cols)))
+    else:
+        mat = None
     return mat
